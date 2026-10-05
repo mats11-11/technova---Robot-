@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechNova - Robot Wall‑E contra la contaminación</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+body {
+  background:
+  radial-gradient(circle at top,
+  #334155 0%,
+  #1e293b 30%,
+  #0f172a 70%,
+  #020617 100%);
+
+  color: white;
+  overflow-x: hidden;
+}
+
+    /* NAVBAR */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+    }
+
+.logo{
+  font-size:24px;
+  font-weight:700;
+
+  background:linear-gradient(
+  90deg,
+  #93c5fd,
+  #60a5fa,
+  #38bdf8
+  );
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  text-shadow:
+  0 0 20px rgba(96,165,250,.5);
+}
+    nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: .3s;
+    }
+
+    nav a:hover {
+      color: #00ff9c;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+.hero h1{
+
+font-size:80px;
+
+background:linear-gradient(
+90deg,
+#ffffff,
+#93c5fd,
+#60a5fa
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+text-shadow:
+0 0 40px rgba(96,165,250,.5);
+
+}
+
+    .hero p {
+      max-width: 700px;
+      margin-top: 20px;
+      opacity: .8;
+    }
+
+.btn{
+
+margin-top:30px;
+
+padding:15px 35px;
+
+border:none;
+
+border-radius:50px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+background:
+linear-gradient(
+90deg,
+#60a5fa,
+#38bdf8
+);
+
+color:white;
+
+box-shadow:
+0 0 25px rgba(96,165,250,.5);
+
+transition:.3s;
+
+}
+
+    .btn:hover {
+      transform: scale(1.1);
+    }
+
+    section {
+      padding: 100px 40px;
+    }
+
+.title{
+
+  text-align:center;
+  font-size:42px;
+  margin-bottom:40px;
+
+  background:linear-gradient(
+  90deg,
+  #e2e8f0,
+  #93c5fd
+  );
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  text-shadow:
+  0 0 25px rgba(96,165,250,.5);
+
+}
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 20px;
+    }
+
+.card{
+
+background:
+rgba(255,255,255,.05);
+
+backdrop-filter:
+blur(15px);
+
+padding:30px;
+
+border-radius:25px;
+
+border:
+1px solid rgba(147,197,253,.2);
+
+box-shadow:
+0 0 25px rgba(96,165,250,.08);
+
+transition:.4s;
+
+}
+
+.card:hover{
+
+transform:
+translateY(-10px)
+scale(1.03);
+
+background:
+rgba(96,165,250,.08);
+
+box-shadow:
+0 0 35px rgba(96,165,250,.35);
+
+}
+
+    .robot {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .robot img {
+      width: 300px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px);} 
+      50% { transform: translateY(-15px);} 
+      100% { transform: translateY(0px);} 
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .stat {
+      font-size: 40px;
+      font-weight: bold;
+      color: #00ff9c;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      background: rgba(0,0,0,0.5);
+    }
+
+    /* fondo animado */
+
+.background {
+position: fixed;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+z-index: -1;
+overflow: hidden;
+}
+
+.background span {
+position: absolute;
+display: block;
+width: 20px;
+height: 20px;
+background: rgba(103, 112, 108, 0.2);
+animation: animate 25s linear infinite;
+bottom: -150px;
+border-radius: 50%;
+}
+
+.background span:nth-child(1){
+left: 25%;
+width: 80px;
+height: 80px;
+animation-delay: 0s;
+}
+
+.background span:nth-child(2){
+left: 10%;
+animation-delay: 2s;
+animation-duration: 12s;
+}
+
+.background span:nth-child(3){
+left: 70%;
+animation-delay: 4s;
+}
+
+.background span:nth-child(4){
+left: 40%;
+width: 60px;
+height: 60px;
+animation-duration: 18s;
+}
+
+.background span:nth-child(5){
+left: 65%;
+}
+
+.background span:nth-child(6){
+left: 75%;
+width: 110px;
+height: 110px;
+}
+
+.background span:nth-child(7){
+left: 35%;
+}
+
+.background span:nth-child(8){
+left: 50%;
+width: 25px;
+height: 25px;
+}
+
+.background span:nth-child(9){
+left: 20%;
+width: 15px;
+height: 15px;
+}
+
+.background span:nth-child(10){
+left: 85%;
+width: 90px;
+height: 90px;
+}
+
+@keyframes animate {
+0% {
+transform: translateY(0) rotate(0deg);
+opacity: 1;
+}
+
+100% {
+transform: translateY(-1000px) rotate(720deg);
+opacity: 0;
+}
+}
+
+/* Tierra animada */
+
+.earth-orbit{
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+width: 600px;
+height: 600px;
+z-index: -2;
+pointer-events: none;
+}
+
+/* orbita */
+.orbit{
+position: absolute;
+width: 100%;
+height: 100%;
+border: 1px dashed rgba(201, 214, 208, 0.349);
+border-radius: 50%;
+animation: rotate 40s linear infinite;
+}
+
+/* planeta tierra */
+.earth{
+position: absolute;
+width: 120px;
+height: 120px;
+background: url("https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg");
+background-size: cover;
+border-radius: 50%;
+top: -60px;
+left: 50%;
+transform: translateX(-50%);
+box-shadow: 0 0 40px rgba(0,150,255,0.5);
+animation: spin 20s linear infinite;
+}
+
+/* rotacion de la orbita */
+@keyframes rotate{
+from{
+transform: rotate(0deg);
+}
+to{
+transform: rotate(360deg);
+}
+}
+
+/* giro del planeta */
+@keyframes spin{
+from{
+transform: translateX(-50%) rotate(0deg);
+}
+to{
+transform: translateX(-50%) rotate(360deg);
+}
+}
+
+
+#voiceBtn{
+
+position:fixed;
+
+bottom:25px;
+right:25px;
+
+width:80px;
+height:80px;
+
+border:none;
+
+border-radius:50%;
+
+font-size:34px;
+
+cursor:pointer;
+
+color:white;
+
+background:
+linear-gradient(
+135deg,
+#60a5fa,
+#38bdf8
+);
+
+box-shadow:
+0 0 30px rgba(96,165,250,.8);
+
+z-index:9999;
+
+}
+
+#voiceBtn:hover{
+
+transform:scale(1.1);
+
+}
+
+#voiceStatus{
+
+position:fixed;
+
+top:100px;
+right:20px;
+
+background:
+rgba(15,23,42,.95);
+
+padding:15px;
+
+border-radius:20px;
+
+border:
+1px solid rgba(147,197,253,.3);
+
+max-width:280px;
+
+z-index:9999;
+
+}
+.robot-extra{
+    text-align:center;
+    margin-top:40px;
+}
+
+.robot-extra img{
+    width:400px;
+    max-width:90%;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 0 30px rgba(96,165,250,.4);
+
+    transition:.4s;
+}
+
+.robot-extra img:hover{
+    transform:scale(1.05);
+}
+
+  </style>
+</head>
+<button id="voiceBtn">🎤</button>
+
+<div id="voiceStatus">
+ Asistente TechNova IA
+</div>
+<body>
+  <div class="earth-orbit">
+  <div class="orbit"></div>
+  <div class="earth"></div>
+</div>
+  <div class="background">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<header>
+<nav>
+<div class="logo">TechNova</div>
+<ul>
+<li><a href="#inicio">Inicio</a></li>
+<li><a href="#problema">Problema</a></li>
+<li><a href="#robot">Robot</a></li>
+<li><a href="#impacto">Impacto</a></li>
+</ul>
+</nav>
+</header>
+
+<section class="hero" id="inicio">
+<h1>TechNova</h1>
+<p>Un robot inspirado en Wall‑E diseñado para combatir la contaminación ambiental mediante recolección inteligente de residuos y monitoreo ecológico.</p>
+<p style="margin-top:20px;color:#93c5fd;">
+🎤 Di:
+"Inicio",
+"Problema",
+"Robot",
+"Funcionamiento",
+"Componentes"
+o
+"Impacto"
+para navegar mediante inteligencia artificial.
+</p>
+<button class="btn" onclick="scrollToSection()">Ver Proyecto</button>
+</section>
+
+<section id="problema">
+<h2 class="title">Problema Ambiental</h2>
+<div class="cards">
+<div class="card">
+<h3>Contaminación</h3>
+<p>Las ciudades generan toneladas de basura que contaminan el suelo y el aire.</p>
+</div>
+
+<div class="card">
+<h3>Plástico</h3>
+<p>Los residuos plásticos tardan cientos de años en degradarse.</p>
+</div>
+
+<div class="card">
+<h3>Falta de reciclaje</h3>
+<p>Muchas personas no separan los residuos correctamente.</p>
+</div>
+</div>
+</section>
+
+<section id="robot">
+<h2 class="title">Robot TechNova</h2>
+<div class="robot">
+<img src="https://www.aiscribbles.com/img/91762/futuristic-blue-robot-portrait/">
+<div>
+<h3>¿Qué hace?</h3>
+<p>El robot TechNova inspirado en Wall‑E detecta basura, la recoge con sus brazos robóticos y la guarda para llevarla a un mejor lugar.</p>
+
+<ul>
+<li> Recolección automática</li>
+<li> Movimiento con servos</li>
+<li> Monitoreo ambiental</li>
+<li>Automatización de basura</li>
+</ul>
+</div>
+</div>
+
+<section id="funcionamiento">
+<h2 class="title">¿Cómo funciona TechNova?</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>1. Detecta basura</h3>
+<p>Utiliza sensores para identificar residuos en el suelo.</p>
+</div>
+
+<div class="card">
+<h3>2. Recoge</h3>
+<p>Los brazos robóticos recogen los desechos automáticamente.</p>
+</div>
+
+<div class="card">
+<h3>3. Clasifica</h3>
+<p>Separa plástico, metal y papel para reciclaje.</p>
+</div>
+
+<div class="card">
+<h3>4. Deposita</h3>
+<p>Coloca la basura en contenedores adecuados.</p>
+</div>
+
+</div>
+</section>
+
+<section id="componentes">
+<h2 class="title">Componentes del Robot</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Arduino</h3>
+<p>Controla todos los movimientos del robot.</p>
+</div>
+
+<div class="card">
+<h3>Servomotores</h3>
+<p>Mueven los brazos y la cabeza del robot.</p>
+</div>
+
+<div class="card">
+<h3>Batería</h3>
+<p>Alimenta el robot de forma portátil.</p>
+</div>
+
+</div>
+</section>
+
+
+</section>
+
+<section id="impacto">
+<h2 class="title">Impacto Ambiental</h2>
+<div class="stats">
+<div>
+<div class="stat" data-target="85">0</div>
+<p>Reducción de basura</p>
+</div>
+
+<div>
+<div class="stat" data-target="60">0</div>
+<p>Mejora reciclaje</p>
+</div>
+
+<div>
+<div class="stat" data-target="100">0</div>
+<p>Compromiso ambiental</p>
+</div>
+</div>
+</section>
+
+<section>
+<h2 class="title">La Contaminación Mundial</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>2.1 Billones</h3>
+<p>Toneladas de basura al año.</p>
+</div>
+
+<div class="card">
+<h3>1 Millón</h3>
+<p>Botellas plásticas cada minuto.</p>
+</div>
+
+<div class="card">
+<h3>90%</h3>
+<p>Del plástico no se recicla.</p>
+</div>
+
+</div>
+</section>
+
+<section>
+<h2 class="title">Objetivos del Proyecto</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Reducir basura</h3>
+<p>Disminuir la contaminación en espacios públicos.</p>
+</div>
+
+<div class="card">
+<h3>Concientizar</h3>
+<p>Promover el cuidado del medio ambiente.</p>
+</div>
+
+<div class="card">
+<h3>Innovar</h3>
+<p>Crear tecnología ecológica accesible.</p>
+</div>
+
+</div>
+</section>
+
+
+<footer>
+Proyecto TechNova - Robot Wall‑E contra la contaminación
+</footer>
+
+
+
+<script>
+function scrollToSection(){
+ document.querySelector("#problema").scrollIntoView({
+ behavior:"smooth"
+ })
+}
+
+// animacion numeros
+const counters = document.querySelectorAll('.stat');
+
+counters.forEach(counter => {
+const update = () => {
+const target = +counter.getAttribute('data-target');
+const c = +counter.innerText;
+const increment = target / 100;
+
+if(c < target){
+counter.innerText = Math.ceil(c + increment);
+setTimeout(update,20);
+} else {
+counter.innerText = target;
+}
+}
+
+update();
+});
+
+const voiceBtn =
+document.getElementById("voiceBtn");
+
+const voiceStatus =
+document.getElementById("voiceStatus");
+
+const SpeechRecognition =
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
+
+if(SpeechRecognition){
+
+const recognition =
+new SpeechRecognition();
+
+recognition.lang =
+"es-ES";
+
+function hablar(texto){
+
+const mensaje =
+new SpeechSynthesisUtterance(texto);
+
+mensaje.lang =
+"es-ES";
+
+speechSynthesis.speak(mensaje);
+
+}
+
+voiceBtn.onclick=()=>{
+
+voiceStatus.innerHTML=
+"🎤 Escuchando...";
+
+recognition.start();
+
+};
+
+recognition.onresult=(e)=>{
+
+const texto=
+e.results[0][0].transcript
+.toLowerCase();
+
+voiceStatus.innerHTML=
+"Escuché: " + texto;
+
+if(texto.includes("inicio")){
+
+hablar("Abriendo inicio");
+
+document
+.querySelector("#inicio")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+else if(texto.includes("problema")){
+
+hablar("Abriendo problema ambiental");
+
+document
+.querySelector("#problema")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+else if(
+texto.includes("robot") ||
+texto.includes("wall e") ||
+texto.includes("walle")
+){
+
+hablar("Abriendo robot");
+
+document
+.querySelector("#robot")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+else if(
+texto.includes("funcionamiento")
+){
+
+hablar("Abriendo funcionamiento");
+
+document
+.querySelector("#funcionamiento")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+else if(
+texto.includes("componentes")
+){
+
+hablar("Abriendo componentes");
+
+document
+.querySelector("#componentes")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+else if(
+texto.includes("impacto")
+){
+
+hablar("Abriendo impacto ambiental");
+
+document
+.querySelector("#impacto")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+else{
+
+hablar(
+"No entendí el comando"
+);
+
+}
+
+};
+
+}
+
+</script>
+
+</body>
+</html>
